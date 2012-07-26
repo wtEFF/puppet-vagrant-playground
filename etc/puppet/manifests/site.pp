@@ -1,4 +1,2 @@
-node default {
-  include truth::enforcer
-}
+node default { include truth::enforcer }
 

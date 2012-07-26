@@ -1,44 +1,25 @@
 class truth::enforcer {
-  
-  # Now conditionally include things based on properties and facts
-  if has_role("loadbalancer") {
-    # include loadbalancer
-    notice("I am a loadbalancer")
-  } else {
-    notice("I am not a loadbalancer")
-  }
-
-  if has_role("db") {
-    notice("I am a database")
-  } else {
-    notice("I am not a database")
-  }
-
-  ## Practical hadoop example --
-  # You can even have logic here to reject configurations you 
-  # say are invalid.
-  if has_role("hadoop-worker") and has_role("hadoop-master") {
-    fail("Cannot be both hadoop-worker and hadoop-master. \$server_tags is '$server_tags'")
-  }
-
-  # All non-hadoop machines should get a special config that makes them able to
-  # send jobs to the hadoop cluster.
-  if !has_role("hadoop-worker") and !has_role("hadoop-master") {
-    notice("I am a hadoop client")
-  }
-  
-  if has_role("hadoop-worker") {
-    notice("I am a hadoop-worker")
-  } else {
-    notice("I am not a hadoop-worker")
-  }
-
-  if has_role("hadoop-master") {
-    notice("I am a hadoop-master")
-  } else {
-    notice("I am not a hadoop-master")
-  }
-
-
-
+ 
+    $groupname = "$company_role:$company_site"
+        case $groupname {
+            "web:site1" : {
+                include roles::httpd_dc1-zone1
+             }
+            "web:site2" : {
+                include roles::httpd_dc2_zone1
+             }
+            "memcached:site1" : {
+                include roles::memcached_dc1-zone1
+             }
+            "memcached:site2" : {
+                include roles::memcached_dc2_zone1
+             }
+        }
+ 
+    case $company_role {
+        "Application" : {
+        notice (" I am in application")
+        }
+    }      
 }
+
