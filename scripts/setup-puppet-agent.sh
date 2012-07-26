@@ -1,3 +1,8 @@
 echo "192.168.2.10    puppet-master.local" >> /etc/hosts
 
-puppet agent --server puppet-master.local --pluginsync
+cat <<HERE > /tmp/intu.facts
+Role = Web
+Platform = QDCA
+HERE
+
+puppet agent --server puppet-master.local --test --pluginsync
