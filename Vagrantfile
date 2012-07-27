@@ -12,18 +12,22 @@ Vagrant::Config.run do |config|
     cfg.vm.provision :shell, :path => "scripts/setup-puppet-master.sh"
   end
 
-  config.vm.define :puppetagent-web do |cfg|
+  config.vm.define :puppetagent_web do |cfg|
     cfg.vm.host_name = "puppet-agent-web.local"
     cfg.vm.network :hostonly, "192.168.2.11"
-
     cfg.vm.provision :shell, :path => "scripts/setup-puppet-agent-web.sh"
   end
   
-  config.vm.define :puppetagent-memcached do |cfg|
+  config.vm.define :puppetagent_memcached do |cfg|
     cfg.vm.host_name = "puppet-agent-memcached.local"
     cfg.vm.network :hostonly, "192.168.2.12"
-
     cfg.vm.provision :shell, :path => "scripts/setup-puppet-agent-memcached.sh"
+  end
+
+  config.vm.define :puppetagent do |cfg|
+    cfg.vm.host_name = "puppet-agent.local"
+    cfg.vm.network :hostonly, "192.168.2.13"
+    cfg.vm.provision :shell, :path => "scripts/setup-puppet-agent.sh"
   end
 
 end
