@@ -8,26 +8,26 @@ Vagrant::Config.run do |config|
   config.vm.define :puppetmaster do |cfg|
     cfg.vm.host_name = "puppet-master.local"
     cfg.vm.network :hostonly, "192.168.2.10"
-
     cfg.vm.provision :shell, :path => "scripts/setup-puppet-master.sh"
   end
 
-  config.vm.define :puppetagent_web do |cfg|
-    cfg.vm.host_name = "puppet-agent-web.local"
-    cfg.vm.network :hostonly, "192.168.2.11"
-    cfg.vm.provision :shell, :path => "scripts/setup-puppet-agent-web.sh"
+  config.vm.define :puppetagent_app do |cfg|
+    cfg.vm.host_name = "puppet-agent-app.local"
+    cfg.vm.network :hostonly, "192.168.2.13"
+    cfg.vm.provision :shell, :path => "scripts/setup-puppet-agent-app.sh"
   end
-  
+
   config.vm.define :puppetagent_memcached do |cfg|
     cfg.vm.host_name = "puppet-agent-memcached.local"
     cfg.vm.network :hostonly, "192.168.2.12"
     cfg.vm.provision :shell, :path => "scripts/setup-puppet-agent-memcached.sh"
   end
 
-  config.vm.define :puppetagent do |cfg|
-    cfg.vm.host_name = "puppet-agent.local"
-    cfg.vm.network :hostonly, "192.168.2.13"
-    cfg.vm.provision :shell, :path => "scripts/setup-puppet-agent.sh"
+  config.vm.define :puppetagent_web do |cfg|
+    cfg.vm.host_name = "puppet-agent-web.local"
+    cfg.vm.network :hostonly, "192.168.2.11"
+    cfg.vm.provision :shell, :path => "scripts/setup-puppet-agent-web.sh"
+    cfg.vm.forward_port 80, 8080
   end
 
 end

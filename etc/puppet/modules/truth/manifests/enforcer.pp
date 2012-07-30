@@ -8,6 +8,12 @@ class truth::enforcer {
             "web:site2" : {
                 include roles::httpd_dc2_zone1
              }
+            "app:site1" : {
+                include roles::tomcat_dc1-zone1
+             }
+            "app:site2" : {
+                include roles::tomcat_dc2_zone1
+             }
             "memcached:site1" : {
                 include roles::memcached_dc1-zone1
              }
