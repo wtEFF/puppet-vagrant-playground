@@ -1,6 +1,9 @@
 Puppet playground
 
 Simple test setup of an puppet master and agent to test modules in a virtual environment.
+Puppet nodes are self-classifying (http://nuknad.com/2011/02/11/self-classifying-puppet-nodes/)
+check out scripts/setup-puppet-agent-web.sh
+
 
 Requirements:
 - ruby
@@ -9,4 +12,8 @@ Requirements:
 
 Run:
 - vagrant up
-- vagrant ssh puppetagent
+- vagrant ssh puppetmaster
+- vagrant ssh puppetagent_app
+- vagrant ssh puppetagent_memcached
+- vagrant ssh puppetagent_web
+http://localhost:8080 -> http://puppetagent_web:80
